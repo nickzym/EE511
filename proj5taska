@@ -1,0 +1,12 @@
+%ee511proj5taska
+counter = zeros(1,1000);
+for i =1:1000
+    alpha = 0.5;
+    for m = 1:100
+        if rand()<alpha
+           counter(i) = counter(i)+1;
+        end;
+    end;
+end;
+avgpck = mean(counter)
+hist(counter,15);
