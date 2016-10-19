@@ -1,0 +1,46 @@
+%ee511proj5taskb
+counter = zeros(1,1000);
+maxvolumek = 10;
+alpha = 0.5;
+buffer = zeros(1,10);%used to store the packet src,10=k
+fracofdiscard = zeros(1,1000);
+fracofreplacement = zeros(1,1000);
+discard = zeros(1,1000);
+fracbuff = zeros(1,1000);
+replacement = zeros(1,1000);
+position = zeros;
+docu = zeros(1000,10);
+label = zeros(1,1000);
+for i=1:1000
+    discard(i) = 0;
+    label(i) = length(nonzeros(buffer));
+    for m=1:10
+        if rand()<alpha
+            docu(i,m)=1;
+            counter(i) = counter(i)+1;%used to count how many packets come to the cp every slot
+            if ismember(m,buffer)==1  %decide whether some new packets can replace old ones
+                replacement(i)=replacement(i)+1;
+            else
+                position = find(buffer == 0);
+                if isempty(position)==1
+                    discard(i)=discard(i)+1;
+                else
+                    buffer(position(1))=m;
+                end;
+            end;
+        end;
+    end;
+    if counter(i)~=0
+        fracofdiscard(i)= discard(i)/counter(i);
+    else
+        fracofdiscard(i)=0;
+    end;
+    if label(i)~=0
+        fracofreplacement(i) = replacement(i)/label(i);
+    else
+        fracofreplacement(i)=0;
+    end;
+end;
+avgreplacement = mean(fracofreplacement)
+avgfracofdiscard = mean(fracofdiscard)
+plot(fracofreplacement)
