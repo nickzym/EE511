@@ -1,0 +1,44 @@
+%ee511proj5taskb
+avgbuffocp = zeros(1,9);
+avgfracofdiscard = zeros(1,9);
+for capalpha=1:20
+    alpha = capalpha*0.05+0.05;
+    counter = zeros(1,1000);
+    maxvolumek = 5;
+    buffer = zeros(1,1000);
+    fracofdiscard = zeros(1,1000);
+    discard = zeros(1,1000);
+    fracbuff = zeros(1,1000);
+    for i=1:1000
+        discard(i) = 0;
+        if i>1
+            buffer(i) = buffer(i-1);
+        end;
+        for m=1:10
+            if rand()<alpha
+                counter(i) = counter(i)+1;
+            end;
+        end;
+        buffer(i) = buffer(i) + counter(i);
+        if buffer(i) > maxvolumek
+           discard(i) = buffer(i) - maxvolumek;
+           buffer(i) = maxvolumek;
+        end;
+        fracbuff(i) = buffer(i);
+        if buffer(i)~=0
+            buffer(i) = buffer(i)-1;
+        end;   
+        if counter(i)~=0
+            fracofdiscard(i) = discard(i)/counter(i);
+        else
+            fracofdiscard(i) = 0;
+        end;
+    end;
+    avgbuffocp(capalpha) = mean(fracbuff);
+    avgfracofdiscard(capalpha) = mean(fracofdiscard);
+end;
+figure(1)
+plot(avgbuffocp);
+figure(2)
+plot(avgfracofdiscard);
+    
