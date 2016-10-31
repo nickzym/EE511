@@ -6,7 +6,7 @@ c = max(u);
 y = zeros();
 result=zeros();
 count = 1;
-for i=1:1000
+for i=1:30000
     y(i) = exprnd(1);
     fxx = exp(-5*y(i))*(5*y(i))^4/factorial(4);
     gyy = c*exp(-y(i));
@@ -14,6 +14,9 @@ for i=1:1000
     if rand()<=val
         result(count) = y(i);
         count = count+1;
+    end;
+    if count>10000
+        break;
     end;
 end;
 meansn = mean(result)
