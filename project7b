@@ -1,0 +1,31 @@
+g = finverse(Fx);
+
+yy1 = zeros(0);
+xx1 = zeros(0);
+for i =1:10;
+    yy1(i) = rand();
+    xx1(i) = subs(g,x,yy1(i));
+end;
+figure(1);
+cdfplot(xx1); hold on;
+ezplot(Fx,[0,pi]);
+
+xx2 = zeros(0);
+yy2 = zeros(0);
+for i =1:100;
+    yy2(i) = rand();
+    xx2(i) = subs(g,x,yy2(i));
+end;
+figure(2);
+cdfplot(xx2); hold on;
+ezplot(Fx,[0,pi]);
+
+yy3 = zeros(0);
+xx3 = zeros(0);
+for i =1:1000;
+    yy3(i) = rand();
+    xx3(i) = subs(g,x,yy3(i));
+end;
+figure(3);
+cdfplot(xx3); hold on;
+ezplot(Fx,[0,pi]);
