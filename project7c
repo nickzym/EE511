@@ -1,0 +1,10 @@
+xx2 = zeros(0);
+yy2 = zeros(0);
+for i =1:100;
+    yy2(i) = rand();
+    xx2(i) = subs(g,x,yy2(i));
+end;
+
+m  = sum(xx2)/100
+mse = variance/100
+msec = var(xx2)/100
