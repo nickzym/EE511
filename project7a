@@ -1,0 +1,10 @@
+%proj7bootsrapping
+syms x val
+integral = int(sin(x),0,pi);
+c = 1/integral
+Fx1 = int(c*sin(x)) + val;
+t = subs(Fx1,x,0);
+value = solve(t);
+Fx = subs(Fx1,val,value)
+mean = int(x*c*sin(x),0,pi)
+variance = int((x-mean)^2*c*sin(x),0,pi)
