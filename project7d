@@ -1,0 +1,7 @@
+sample = zeros();
+ for i=1:50
+    boot = randi(100,1);
+    sample(i) = xx2(boot);
+ end;
+ meanofsample = sum(sample)/50
+ varofsample = var(sample)
