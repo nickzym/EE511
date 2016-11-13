@@ -1,0 +1,12 @@
+varofsample = zeros();
+array = zeros();
+for m=1:1000
+    sample = zeros();
+        for i=1:50
+            boot = randi(100,1);
+            sample(i) = xx2(boot);
+        end;
+    varofsample(m) = var(sample);
+    array(m) = (varofsample(m) - 0.5365)^2;
+end;
+msefstars2 = sum(array)/1000
