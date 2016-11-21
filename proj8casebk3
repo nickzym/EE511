@@ -142,16 +142,3 @@ end;
 
 prob5moreMach = sum(newnum.*time)/sum(time)
 expNumOfIdleTech = sum(time.*idletech)/sum(time)
-
-% exp = zeros();
-% for i=1:1000
-%     exp(i) = exprnd(3);
-% end;
-% mean(exp)
-%     
-        
-        
-        
-
-      
-
