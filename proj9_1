@@ -1,0 +1,38 @@
+%ee511 proj9
+lamda = 0.1;
+mu = 0.15;
+numOfDepart = 100000;
+time_arrival = zeros(1,numOfDepart);%time_ means shike
+time_leave = zeros(1,numOfDepart);
+
+time_arrival(1)=exprnd(1/lamda);
+time_leave(1)=time_arrival(1)+exprnd(1/mu);
+
+for i=2:numOfDepart
+    time_arrival(i)=time_arrival(i-1)+exprnd(1/lamda);
+    if time_leave(i-1)<time_arrival(i)
+        time_leave(i)=time_arrival(i)+exprnd(1/mu);
+    else
+        time_leave(i)=time_leave(i-1)+exprnd(1/mu);
+    end;
+end;
+
+t_wait = time_leave - time_arrival;
+t_wait_avg = mean(t_wait)
+
+time = [time_arrival,time_leave];
+time = sort(time);
+numInQueue = zeros(size(time));
+numInQueue(1)=1;
+
+for i =2:length(time)
+    if( ismember(time(i),time_arrival)==1)
+        numInQueue(i)=numInQueue(i-1)+1;
+    else
+        numInQueue(i)=numInQueue(i-1)-1;
+    end;
+end;
+% figure(1)
+% plot(time,numInQueue);
+% figure(2)
+% hist(numInQueue,15);
